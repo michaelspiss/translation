@@ -1,10 +1,7 @@
 <?php
+namespace MichaelSpiss\Translation;
 
-namespace MichaelSpiss\Translation\Tests;
-
-use MichaelSpiss\Translation\LoaderInterface;
-
-class TestLoader implements LoaderInterface {
+class ArrayLoader implements LoaderInterface {
 
     /**
      * Returns an array containing key => value pairs of the file.
