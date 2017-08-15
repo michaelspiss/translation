@@ -17,4 +17,18 @@ class TranslatorTest extends TestCase {
     public function testIndexDirectoryGetsAllSubfoldersAndSetsThemAsSupportedLocals() {
         $this->assertTrue($this->translator->supports('en'));
     }
+
+    public function testGetLocaleReturnsDefaultLocale() {
+        $this->assertEquals('en', $this->translator->getLocale());
+    }
+
+    public function testSetLocaleSetsNewLocaleIfSupportedLocaleIsEntered() {
+        $this->translator->setLocale('de');
+        $this->assertEquals('de', $this->translator->getLocale());
+    }
+
+    public function testSetLocaleSetsFallbackIfUnsupportedLocaleIsEntered() {
+        $this->translator->setLocale('fr');
+        $this->assertEquals('en', $this->translator->getLocale());
+    }
 }

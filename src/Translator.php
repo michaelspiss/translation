@@ -61,4 +61,24 @@ class Translator {
     public function supports(string $local) : bool {
         return in_array($local, $this->supported_locales);
     }
+
+    /**
+     * Returns the currently set locale
+     * @return string
+     */
+    public function getLocale() : string {
+        return $this->locale;
+    }
+
+    /**
+     * Sets a new locale. If it isn't supported the fallback is set.
+     * @param string $locale
+     */
+    public function setLocale(string $locale) {
+        if($this->supports($locale)) {
+            $this->locale = $locale;
+        } else {
+            $this->locale = $this->fallback_locale;
+        }
+    }
 }
