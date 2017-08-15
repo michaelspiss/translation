@@ -38,6 +38,7 @@ class Translator {
     public function __construct($fallback_locale, $resource_dir) {
         $this->fallback_locale = $fallback_locale;
         $this->locale = $fallback_locale;
+        $this->resource_dir = $resource_dir;
         $this->index_directory($resource_dir);
     }
 
@@ -90,5 +91,126 @@ class Translator {
      */
     public function addLoader(string $format, LoaderInterface $loader) {
         $this->loaders[$format] = $loader;
+    }
+
+    /**
+     * The main method to get from key to string
+     * @param string $key the key to search by. Format: filename.key.subkey
+     * @param array  $replace replacements for {placeholders}.
+     * Must be in ['placeholder' => 'value'] format.
+     * @param string $locale temporarily changes the locale for this request
+     * @return string
+     */
+    protected function get(string $key, array $replace = [], string $locale = '') {
+        // if $locale is unset, use default locale
+        $locale = $locale == '' ? $this->locale : $locale;
+
+        $key_parts = explode('.', $key);
+        $group = array_shift($key_parts);
+
+        // use cache if possible
+        if(isset($this->cache[$locale][$group])) {
+            $group_content = $this->cache[$locale][$group];
+        } else {
+            $group_content = $this->loadFromFile($locale, $group);
+        }
+        $base_value = $this->getValue($key_parts, $group_content) ?? $key;
+        return $this->replace($base_value, $replace);
+    }
+
+    /**
+     * Loads the group's translation data from the first file that
+     * matches it's name
+     * @param string $locale temporarily sets the locale for this request
+     * @param string $group the filename to search for
+     * @return array returns an empty array if no file with this name exists
+     */
+    private function loadFromFile(string $locale, string $group): array {
+        $file = $this->findFile($locale, $group);
+        if ($file) {
+            $file_exploded = explode('.', $file);
+            $extension = array_pop($file_exploded);
+            if(isset($this->loaders[$extension])) {
+                $content = $this->loaders[$extension]->getContent($file);
+                $this->updateCache($locale, $group, $content);
+                return $content;
+            }
+        }
+        return [];
+    }
+
+    /**
+     * Finds the file that holds the translation data for the specified
+     * group
+     * @param string $locale
+     * @param string $group
+     * @return bool|string the file path or, if not found, false
+     */
+    private function findFile(string $locale, string $group) {
+        $files = glob($this->resource_dir.'/'.$locale.'/'.$group.'.*');
+        foreach($files as $file) {
+            if(is_file($file)) {
+                return $file;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns the key's value. If not found, it returns null
+     * @param array $key_parts
+     * @param array $group_content
+     * @return string|null
+     */
+    private function getValue(array $key_parts, array $group_content) {
+        $iteration = $group_content;
+        foreach ($key_parts as $part) {
+            if(isset($iteration[$part])) {
+                $iteration = $iteration[$part];
+            } else {
+                return null;
+            }
+        }
+        if(is_string($iteration)) {
+            return $iteration;
+        }
+        return null;
+    }
+
+    /**
+     * Updates cache with the loaded translations
+     * @param string $locale
+     * @param string $group
+     * @param array  $group_content
+     */
+    private function updateCache(string $locale, string $group, array $group_content) {
+        $data_array = [ $locale => [ $group => $group_content ] ];
+        $this->cache = array_merge($this->cache, $data_array);
+    }
+
+    /**
+     * Replaces placeholders with their values. If no value is passed,
+     * the placeholder stays.
+     * @param string $base_value  the whole string
+     * @param array  $replace     An array of ['placeholder' => 'value'] pairs
+     * @return string
+     */
+    public function replace(string $base_value, array $replace): string {
+        return preg_replace_callback('/\{[a-zA-Z]+\}/', function($match) use ($replace) {
+            $name = trim($match[0], "{}");
+            return $replace[$name] ?? $match[0];
+        }, $base_value);
+    }
+
+    /**
+     * The main method to get from key to string (Public)
+     * @param string $key the key to search by. Format: filename.key.subkey
+     * @param array  $replace replacements for {placeholders}.
+     * Must be in ['placeholder' => 'value'] format.
+     * @param string $locale temporarily changes the locale for this request
+     * @return string
+     */
+    public function trans(string $key, array $replace = [], string $locale = '') {
+        return $this->get($key, $replace, $locale);
     }
 }

@@ -1,5 +1,9 @@
 <?php
 
 return [
-    'one' => 'Eins'
+    'one' => 'Eins',
+    'with_placeholder' => 'Mit {placeholder}!',
+    'key' => [
+        'subkey' => 'Unterschlüssel Schlüssel'
+    ]
 ];
