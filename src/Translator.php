@@ -8,23 +8,23 @@ namespace MichaelSpiss\Translator;
  */
 class Translator {
     /** @var string $locale */
-    private $locale;
+    protected $locale;
 
     /** @var string $resource_dir */
-    private $resource_dir;
+    protected $resource_dir;
 
     /** @var array $loaders */
-    private $loaders = [];
+    protected $loaders = [];
 
     /** @var string $fallback_locale */
-    private $fallback_locale;
+    protected $fallback_locale;
 
     /** @var MessageSelector $selector */
-    private $selector;
+    protected $selector;
 
-    /** @var array $locales */
-    private $locales = [];
+    /** @var array $supported_locales */
+    protected $supported_locales = [];
 
     /** @var array $cache */
-    private $cache = [];
+    protected $cache = [];
 }
