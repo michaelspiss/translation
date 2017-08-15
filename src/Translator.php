@@ -81,4 +81,14 @@ class Translator {
             $this->locale = $this->fallback_locale;
         }
     }
+
+    /**
+     * Adds a new loader for a specific file-type.
+     * Only one loader per file-type is permitted.
+     * @param string          $format (ex. php, yml, json, ...)
+     * @param LoaderInterface $loader
+     */
+    public function addLoader(string $format, LoaderInterface $loader) {
+        $this->loaders[$format] = $loader;
+    }
 }
