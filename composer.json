@@ -17,12 +17,12 @@
     },
     "autoload": {
         "psr-4": {
-            "MichaelSpiss\\Translation\\": "/src"
+            "MichaelSpiss\\Translation\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MichaelSpiss\\Translation\\Tests\\": "/tests"
+            "MichaelSpiss\\Translation\\Tests\\": "tests/"
         }
     }
 }

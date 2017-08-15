@@ -1,6 +1,6 @@
 <?php
 
-namespace MichaelSpiss\Translator;
+namespace MichaelSpiss\Translation;
 
 /**
  * Class MessageSelector

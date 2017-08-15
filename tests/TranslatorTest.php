@@ -1,10 +1,9 @@
 <?php
 
-namespace MichaelSpiss\Translator\Tests;
+namespace MichaelSpiss\Translation\Tests;
 
-use MichaelSpiss\Translator\Translator;
+use MichaelSpiss\Translation\Translator;
 use PHPUnit\Framework\TestCase;
-use Webmozart\Assert\Assert;
 
 class TranslatorTest extends TestCase {
     /** @var Translator $translator */
