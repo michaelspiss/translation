@@ -1,0 +1,24 @@
+{
+    "name": "michaelspiss/translation",
+    "description": "A file based translation component",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "michaelspiss",
+            "email": "michaelspiss@users.noreply.github.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "MichaelSpiss\\Translation\\": "/src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MichaelSpiss\\Translation\\Tests\\": "/tests"
+        }
+    }
+}
