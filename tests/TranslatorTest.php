@@ -90,4 +90,19 @@ class TranslatorTest extends TestCase {
         $this->translator->addLoader('php', new ArrayLoader());
         $this->assertEquals('With {placeholder}!', $this->translator->trans('message.with_placeholder'));
     }
+
+    public function testHasReturnsTrueIfKeyExists() {
+        $this->translator->addLoader('php', new ArrayLoader());
+        $this->assertTrue($this->translator->has('message.one'));
+    }
+
+    public function testHasReturnsFalseIfKeyDoesNotExist() {
+        $this->translator->addLoader('php', new ArrayLoader());
+        $this->assertFalse($this->translator->has('message.unknown'));
+    }
+
+    public function testHasReturnsTrueIfKeyExistsWithLocaleChange() {
+        $this->translator->addLoader('php', new ArrayLoader());
+        $this->assertTrue($this->translator->has('message.one', 'de'));
+    }
 }

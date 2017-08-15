@@ -94,6 +94,16 @@ class Translator {
     }
 
     /**
+     * Checks if a translation is available for the given key
+     * @param string $key
+     * @param string $locale
+     * @return bool
+     */
+    public function has(string $key, string $locale = ''): bool {
+        return $key !== $this->get($key, [], $locale);
+    }
+
+    /**
      * The main method to get from key to string
      * @param string $key the key to search by. Format: filename.key.subkey
      * @param array  $replace replacements for {placeholders}.
