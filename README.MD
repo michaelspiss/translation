@@ -1,6 +1,8 @@
 # Translation
 A file based translation component without dependencies.
 
+[![Build Status](https://travis-ci.org/michaelspiss/translation.svg?branch=master)](https://travis-ci.org/michaelspiss/translation)
+
 It supports **every file format** you throw at it, **pluralization**,
 **placeholders**, is **fully tested** and **documented**.
 
