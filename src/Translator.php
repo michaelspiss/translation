@@ -111,7 +111,7 @@ class Translator {
      */
     protected function get(string $key, array $replace = [], string $locale = '') {
         // if $locale is unset, use default locale
-        $locale = $locale == '' ? $this->locale : $locale;
+        $locale = $locale == '' || !$this->supports($locale) ? $this->locale : $locale;
 
         $key_parts = explode('.', $key);
         $group = array_shift($key_parts);
