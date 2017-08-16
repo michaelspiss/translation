@@ -13,7 +13,7 @@ install:
 
 script:
   - mkdir -p build/logs
-  - php vendor/bin/phpunit -c phpunit.xml --coverage-clover clover.xml
+  - php vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover clover.xml
 
 after_script:
 - php vendor/bin/coveralls
