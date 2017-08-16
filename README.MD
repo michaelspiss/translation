@@ -117,11 +117,14 @@ You can use the following expressions:
 | {3} | match exactly 3 |
 | [1,10] | match everything from 1 to 10, **including** 1 and 10 |
 | [11,*] | match everything from 11 to infinite **including** 11 |
-| ]10,20] | match everything from 10 to 20, **excluding** 10 |
+| ]10,20] | match everything from 10 to 20, **excluding** 10, **including** 20 |
 | ]10,20[ | match everything from 10 to 20, **excluding** 10 and 20 |
+| [10,20[ | match everything from 10 to 20, **including** 10, **excluding** 20 |
+
+Expressions also support integers and floats!
 
 To get the string use the transChoice() method, which takes an additional
-`number` argument:
+`number` argument (type int or float):
 ```php
 $translator->transChoice('message.simple_pluralization', 4);
 // returns "Dogs"
