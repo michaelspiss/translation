@@ -19,9 +19,6 @@ class Translator {
     /** @var string $fallback_locale */
     protected $fallback_locale;
 
-    /** @var MessageSelector $selector */
-    protected $selector;
-
     /** @var array $supported_locales */
     protected $supported_locales = [];
 
@@ -222,5 +219,34 @@ class Translator {
      */
     public function trans(string $key, array $replace = [], string $locale = '') {
         return $this->get($key, $replace, $locale);
+    }
+
+    /**
+     * Is used for translations which need
+     * @param string $key
+     * @param int|float $number
+     * @param array  $replace
+     * @param string $locale
+     * @return string
+     */
+    public function transChoice(string $key, $number, array $replace = [], string $locale = '') {
+        $locale = $locale == '' ? $this->locale : $locale;
+        // get normal translation
+        $translation = $this->get($key, $replace, $locale);
+        // two possibilities:
+        // 1.: singular | plural
+        // 2.: {int} x | [min, max] y | ...
+        $sorted = MessageSelector::getSortedChoices($translation);
+        $choice = MessageSelector::choose($sorted);
+        // invalid string, return key
+        if(MessageSelector::RULE_BROKEN === $choice) {
+            return $key;
+        }
+        if(MessageSelector::RULE_SINGULAR_PLURAL === $choice) {
+            $index = MessageSelector::getPluralIndex($locale, $number);
+            return $sorted['none'][$index];
+        }
+        // if ( MessageSelector::RULE_EXPRESSION === $choice ) { ...
+        return MessageSelector::getStringFromExpression($sorted['expression'], $number) ?? $key;
     }
 }

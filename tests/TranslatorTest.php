@@ -2,6 +2,7 @@
 
 namespace MichaelSpiss\Translation\Tests;
 
+use MichaelSpiss\Translation\MessageSelector;
 use MichaelSpiss\Translation\Translator;
 use MichaelSpiss\Translation\ArrayLoader;
 use PHPUnit\Framework\TestCase;
@@ -92,4 +93,41 @@ class TranslatorTest extends TestCase {
     public function testHasReturnsTrueIfKeyExistsWithLocaleChange() {
         $this->assertTrue($this->translator->has('message.one', 'de'));
     }
+
+    public function testTransChoiceReturnsSingularStringWhenNumberIsOne() {
+        $this->assertEquals('singular', $this->translator->transChoice('message.simple_choice', 1));
+    }
+
+    public function testTransChoiceReturnsPluralStringWhenNumberMoreThanOne() {
+        $this->assertEquals('plural', $this->translator->transChoice('message.simple_choice', 2));
+    }
+
+    public function testTransChoiceReturnsCorrectStaticWhenUsingExpressions() {
+        $this->assertEquals('None', $this->translator->transChoice('message.expression_choice', 0));
+    }
+
+    public function testTransChoiceReturnsCorrectSecondStaticWhenUsingExpressions() {
+        $this->assertEquals('Some', $this->translator->transChoice('message.expression_choice', 1));
+    }
+
+    public function testTransChoiceWorksWithInclude() {
+        $this->assertEquals('Include', $this->translator->transChoice('message.expression_exclude_include', 10));
+    }
+
+    public function testTransChoiceWorksWithExclude() {
+        $this->assertEquals('message.expression_exclude_include', $this->translator->transChoice('message.expression_exclude_include', 11));
+    }
+
+    public function testTransChoiceReturnsKeyIfNoRuleCanBeApplied() {
+        $this->assertEquals('message.invalid', $this->translator->transChoice('message.invalid', 15));
+    }
+
+    public function testMessageSelectorGetStringFromExpressionSkipsInvalidExpression() {
+        $this->assertEquals('valid', MessageSelector::getStringFromExpression(['invalid' => 'string', '{10}' => 'valid'], 10));
+    }
+
+    public function testMultiplePlaceholdersAreReplacedCorrectly() {
+        $this->assertEquals('Hello World!', $this->translator->trans('message.multiple_placeholders', ['placeholderOne' => 'Hello', 'placeholderTwo' => 'World']));
+    }
+
 }
