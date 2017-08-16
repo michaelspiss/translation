@@ -37,7 +37,7 @@ language and holds the translation files.
 ```
 translations/
  |- en/
- |   |- messages.php
+ |   |- message.php
  |- de/
  |- fr/
 ```
