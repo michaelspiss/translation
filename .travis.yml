@@ -8,6 +8,7 @@ php:
 
 install:
   - composer self-update
+  - rm composer.lock
   - composer install
   - composer require satooshi/php-coveralls --dev
 
