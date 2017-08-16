@@ -39,7 +39,7 @@ class MessageSelector {
         $list = [];
         // find expressions and sort
         foreach($parts as $part) {
-            $regex = '/(\{\s*\d+\s*\}|(\]|\[)\s*(\d+)\s*,\s*(\d+|\*)\s*(\]|\[))/';
+            $regex = '/(\{\s*\d+(?>\.\d+)?\s*\}|(\]|\[)\s*(\d+(?>\.\d+)?)\s*,\s*(\d+(?>\.\d+)?|\*)\s*(\]|\[))/';
             $expression = [];
             preg_match($regex, $part, $expression);
             $part = preg_replace($regex, '', $part);
@@ -239,8 +239,8 @@ class MessageSelector {
     protected static function expressionMatches(string $expression, $number): bool {
         $expression = trim($expression, ' ');
         $expression = str_replace(' ', '', $expression);
-        $static = '/\{\s*(\d+)\s*\}/';
-        $range = '/(\]|\[)\s*(\d+)\s*,\s*(\d+|\*)\s*(\]|\[)/';
+        $static = '/\{\s*(\d+(?>\.\d+)?)\s*\}/';
+        $range = '/(\]|\[)\s*(\d+(?>\.\d+)?)\s*,\s*(\d+(?>\.\d+)?|\*)\s*(\]|\[)/';
         $split = [];
         if(preg_match($static, $expression, $split)) {
             return $split[1] == $number;
