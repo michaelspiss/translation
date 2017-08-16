@@ -37,6 +37,7 @@ class Translator {
         $this->locale = $fallback_locale;
         $this->resource_dir = $resource_dir;
         $this->index_directory($resource_dir);
+        $this->addLoader('php', new ArrayLoader());
     }
 
     /**
