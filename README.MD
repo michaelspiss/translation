@@ -97,7 +97,7 @@ You can have as many placeholders in a string as you like!
 
 ## Pluralization
 To enable pluralization for a string simply add a pipe-character between
-singular and plural form in your translation file:
+the singular and plural form in your translation file:
 
 ###### message.php
 ```php
