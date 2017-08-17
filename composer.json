@@ -1,6 +1,6 @@
 {
     "name": "michaelspiss/translation",
-    "description": "A file based translation component",
+    "description": "A file based translation component without dependencies.",
     "license": "MIT",
     "authors": [
         {
