@@ -20,7 +20,6 @@ $ composer require michaelspiss/translation
 Instantiating a new Translator is easy: Simply pass it the default locale
 ('en' in this case) and the path to your translations directory!
 
-<small>*Please make sure you required the composer autoloader</small>
 ```php
 require 'vendor/autoload.php'; // composer autoloader
 
@@ -35,7 +34,7 @@ To get a string in a specific language use the trans() method and pass it the ke
 $translator->trans('message.hello_world');
 ```
 In this case the string would be found in `path/to/translations/en/message.php`.
-The file itself would look like [this](#file)
+The file itself would look like "message.php" below.
 
 ## Folder structure
 Language strings are stored in files in the directory you passed the Translator
@@ -50,7 +49,7 @@ translations/
 ```
 A translation file would simply look like the following:
 
-<small id="file">**message.php**</small>
+###### message.php
 ```php
 <?php
 
@@ -80,7 +79,7 @@ $translator->transChoice('message.choice', 1, [], 'de');
 In your translation files, a placeholder is defined by putting curly braces
 around the placeholder name (only upper- and lowercase letters):
 
-<small>**message.php**</small>
+###### message.php
 ```php
 <?php
 
@@ -100,7 +99,7 @@ You can have as many placeholders in a string as you like!
 To enable pluralization for a string simply add a pipe-character between
 singular and plural form in your translation file:
 
-<small>**message.php**</small>
+###### message.php
 ```php
 <?php
 
