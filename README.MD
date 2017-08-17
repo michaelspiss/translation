@@ -58,7 +58,7 @@ return [
 ];
 ```
 Even though only .php files are supported out-of-the-box, translation files 
-can be of every format.
+can be of every format. For more information, please see the [corresponding wiki article](https://github.com/michaelspiss/translation/wiki/Custom-Loader).
 
 
 ## Setting the locale
@@ -77,7 +77,7 @@ $translator->transChoice('message.choice', 1, [], 'de');
 
 ## Using placeholders
 In your translation files, a placeholder is defined by putting curly braces
-around the placeholder name (only upper- and lowercase letters):
+around the placeholder name (upper- and lowercase letters only):
 
 ###### message.php
 ```php
@@ -138,6 +138,10 @@ $translator->transChoice('message.simple_pluralization', 4);
 $translator->transChoice('message.advanced_pluralization', 8);
 // returns "Some"
 ```
+## Read more
+If you want further information on the [`Translator`'s methods](https://github.com/michaelspiss/translation/wiki/Method-overview)
+or [how to use other file formats than .php](https://github.com/michaelspiss/translation/wiki/Custom-Loader)
+check out [this project's wiki](https://github.com/michaelspiss/translation/wiki)!
 
 ### PHP Requirements
 * PHP >= 7.0.0
