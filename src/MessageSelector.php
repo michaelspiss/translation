@@ -76,6 +76,8 @@ class MessageSelector {
 
     /**
      * Get the index to use for pluralization.
+     * @codeCoverageIgnore because this is a giant switch statement which really makes no
+     * sense to cover
      *
      * Method mostly from the symfony/translation package, which is distributed under the
      * MIT license. Copyright (c) Fabien Potencier <fabien@symfony.com>
