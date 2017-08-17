@@ -32,8 +32,10 @@ $translator = new Translator('en', 'path/to/translations');
 The component uses keys in the dot-notation to identify which string to load.
 To get a string in a specific language use the trans() method and pass it the key:
 ```php
-$translator->trans('messages.hello_world');
+$translator->trans('message.hello_world');
 ```
+In this case the string would be found in `path/to/translations/en/message.php`.
+The file itself would look like [this](#file)
 
 ## Folder structure
 Language strings are stored in files in the directory you passed the Translator
@@ -48,7 +50,7 @@ translations/
 ```
 A translation file would simply look like the following:
 
-<small>**message.php**</small>
+<small id="file">**message.php**</small>
 ```php
 <?php
 
