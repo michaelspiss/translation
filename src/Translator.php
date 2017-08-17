@@ -32,7 +32,7 @@ class Translator {
      * @param string $resource_dir directory where every subfolder
      * represents a supported language
      */
-    public function __construct($fallback_locale, $resource_dir) {
+    public function __construct(string $fallback_locale, string $resource_dir) {
         $this->fallback_locale = $fallback_locale;
         $this->locale = $fallback_locale;
         $this->resource_dir = $resource_dir;
@@ -44,7 +44,7 @@ class Translator {
      * Indexes the given directory, Adds found subdirs to supported languages
      * @param string $directory
      */
-    protected function index_directory($directory) {
+    protected function index_directory(string $directory) {
         $subdirs = [];
         foreach(glob($directory.'/*', GLOB_ONLYDIR) as $dir) {
             $subdirs[] = basename($dir);
