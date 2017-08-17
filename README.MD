@@ -2,6 +2,7 @@
 A file based translation component without dependencies.
 
 [![Build Status](https://travis-ci.org/michaelspiss/translation.svg?branch=master)](https://travis-ci.org/michaelspiss/translation)
+[![Coverage Status](https://coveralls.io/repos/github/michaelspiss/translation/badge.svg?branch=master)](https://coveralls.io/github/michaelspiss/translation?branch=master)
 
 It supports **every file format** you throw at it, **pluralization**,
 **placeholders**, is **fully tested** and **documented**.
