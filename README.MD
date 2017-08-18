@@ -20,7 +20,6 @@ $ composer require michaelspiss/translation
 Instantiating a new Translator is easy: Simply pass it the default locale
 ('en' in this case) and the path to your translations directory!
 
-<small>*Please make sure you required the composer autoloader</small>
 ```php
 require 'vendor/autoload.php'; // composer autoloader
 
@@ -32,8 +31,10 @@ $translator = new Translator('en', 'path/to/translations');
 The component uses keys in the dot-notation to identify which string to load.
 To get a string in a specific language use the trans() method and pass it the key:
 ```php
-$translator->trans('messages.hello_world');
+$translator->trans('message.hello_world');
 ```
+In this case the string would be found in `path/to/translations/en/message.php`.
+The file itself would look like "message.php" below.
 
 ## Folder structure
 Language strings are stored in files in the directory you passed the Translator
@@ -48,7 +49,7 @@ translations/
 ```
 A translation file would simply look like the following:
 
-<small>**message.php**</small>
+###### message.php
 ```php
 <?php
 
@@ -57,7 +58,7 @@ return [
 ];
 ```
 Even though only .php files are supported out-of-the-box, translation files 
-can be of every format.
+can be of every format. For more information, please see the [corresponding wiki article](https://github.com/michaelspiss/translation/wiki/Custom-Loader).
 
 
 ## Setting the locale
@@ -76,9 +77,9 @@ $translator->transChoice('message.choice', 1, [], 'de');
 
 ## Using placeholders
 In your translation files, a placeholder is defined by putting curly braces
-around the placeholder name (only upper- and lowercase letters):
+around the placeholder name (upper- and lowercase letters only):
 
-<small>**message.php**</small>
+###### message.php
 ```php
 <?php
 
@@ -96,9 +97,9 @@ You can have as many placeholders in a string as you like!
 
 ## Pluralization
 To enable pluralization for a string simply add a pipe-character between
-singular and plural form in your translation file:
+the singular and plural form in your translation file:
 
-<small>**message.php**</small>
+###### message.php
 ```php
 <?php
 
@@ -137,6 +138,10 @@ $translator->transChoice('message.simple_pluralization', 4);
 $translator->transChoice('message.advanced_pluralization', 8);
 // returns "Some"
 ```
+## Read more
+If you want further information on the [`Translator`'s methods](https://github.com/michaelspiss/translation/wiki/Method-overview)
+or [how to use other file formats than .php](https://github.com/michaelspiss/translation/wiki/Custom-Loader)
+check out [this project's wiki](https://github.com/michaelspiss/translation/wiki)!
 
 ### PHP Requirements
 * PHP >= 7.0.0
