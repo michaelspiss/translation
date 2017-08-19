@@ -249,10 +249,7 @@ class MessageSelector {
         }
         $split = [];
         if(preg_match($range, $expression, $split)) {
-            $first_bracket = $split[1];
-            $first_digit = $split[2];
-            $second_digit = $split[3];
-            $second_bracket = $split[4];
+            list($full_string, $first_bracket, $first_digit, $second_digit, $second_bracket) = $split;
             //                                       ?       [ includes                 ] excludes
             $first_condition = $first_bracket == '[' ? $number >= $first_digit : $number > $second_digit;
             $second_condition = $second_digit == '*' ? true : $second_bracket == ']' ? $number <= $second_digit : $number < $second_digit;
